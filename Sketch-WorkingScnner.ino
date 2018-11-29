@@ -36,20 +36,20 @@
 
 void setup(void) {
   Serial.begin(115200);
-  Serial.println("Hello!");
+  //Serial.println("Hello!");
 
   nfc.begin();
 
   uint32_t versiondata = nfc.getFirmwareVersion();
   if (! versiondata) {
-    Serial.print("Didn't find PN53x board");
+    //Serial.print("Didn't find PN53x board");
     while (1); // halt
   }
  
   // Got ok data, print it out!
-  Serial.print("Found chip PN5"); Serial.println((versiondata>>24) & 0xFF, HEX);
-  Serial.print("Firmware ver. "); Serial.print((versiondata>>16) & 0xFF, DEC);
-  Serial.print('.'); Serial.println((versiondata>>8) & 0xFF, DEC);
+  //Serial.print("Found chip PN5"); Serial.println((versiondata>>24) & 0xFF, HEX);
+  //Serial.print("Firmware ver. "); Serial.print((versiondata>>16) & 0xFF, DEC);
+  //Serial.print('.'); Serial.println((versiondata>>8) & 0xFF, DEC);
  
   // Set the max number of retry attempts to read from a card
   // This prevents us from waiting forever for a card, which is
@@ -59,7 +59,7 @@ void setup(void) {
   // configure board to read RFID tags
   nfc.SAMConfig();
    
-  Serial.println("Waiting for an ISO14443A card");
+  //Serial.println("Waiting for an ISO14443A card");
 }
 
 void loop(void) {
@@ -77,13 +77,16 @@ void loop(void) {
   if (success) {
     // Found a card!
 
-    Serial.print("Card detected, UID: ");
+    //Serial.print("Card detected, UID: ");
     // turn the four byte UID of a mifare classic into a single variable #
     cardidentifier = uid[3];
     cardidentifier <<= 8; cardidentifier |= uid[2];
     cardidentifier <<= 8; cardidentifier |= uid[1];
     cardidentifier <<= 8; cardidentifier |= uid[0];
-    Serial.println(cardidentifier);
+    Serial.print(cardidentifier);
+    //Serial.println(cardidentifier);
+    
+
     Serial.println("");
     // Wait 1 second before continuing
     delay(1000);
@@ -91,6 +94,6 @@ void loop(void) {
   else
   {
     // PN532 probably timed out waiting for a card
-    Serial.println("Timed out waiting for a card");
+    //Serial.println("Timed out waiting for a card");
   }
 }
