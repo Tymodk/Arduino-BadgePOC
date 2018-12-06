@@ -36,6 +36,8 @@
 
 void setup(void) {
   Serial.begin(115200);
+  pinMode(12, OUTPUT);
+  pinMode(11, OUTPUT);
   //Serial.println("Hello!");
 
   nfc.begin();
@@ -84,15 +86,22 @@ void loop(void) {
     cardidentifier <<= 8; cardidentifier |= uid[1];
     cardidentifier <<= 8; cardidentifier |= uid[0];
     Serial.print(cardidentifier);
+    digitalWrite(12, HIGH);   // turn the LED on (HIGH is the voltage level)
+  delay(1000);              // wait for a second
+  
     //Serial.println(cardidentifier);
     
 
     Serial.println("");
     // Wait 1 second before continuing
-    delay(1000);
+    delay(2500);
+    digitalWrite(12, LOW);
   }
   else
   {
+    digitalWrite(11, HIGH);
+    delay(500);
+    digitalWrite(11, LOW);
     // PN532 probably timed out waiting for a card
     //Serial.println("Timed out waiting for a card");
   }

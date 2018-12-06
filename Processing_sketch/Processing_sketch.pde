@@ -21,15 +21,18 @@ void draw()
   {  // If data is available,
   val = myPort.readStringUntil('\n');  // read it and store it in val
   } 
-  println(val); //print it out in the console
+  
   if(val != null){
-    println("notnull");
-    PostRequest post = new PostRequest("https://webhook.site/21a26e84-04b4-430f-92cc-df011c64247f");
-    post.addData("id", val);
+    println("sending post...");
+    PostRequest post = new PostRequest("http://braindrain.mtantwerpen.eu");
+    post.addData("arduino_id", val);
     post.send();
     println("Reponse Content: " + post.getContent());
-    println("Reponse Content-Length Header: " + post.getHeader("Content-Length"));
+    //println("Reponse Content-Length Header: " + post.getHeader("Content-Length"));
+    println("...post is send");
 
+    val = null;
+    delay(2000);
       
   }
 }
