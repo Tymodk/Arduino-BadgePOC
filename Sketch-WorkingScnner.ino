@@ -38,6 +38,7 @@ void setup(void) {
   Serial.begin(115200);
   pinMode(12, OUTPUT);
   pinMode(11, OUTPUT);
+  pinMode(9, OUTPUT);
   //Serial.println("Hello!");
 
   nfc.begin();
@@ -87,7 +88,9 @@ void loop(void) {
     cardidentifier <<= 8; cardidentifier |= uid[0];
     Serial.print(cardidentifier);
     digitalWrite(12, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(1000);              // wait for a second
+    digitalWrite(9, HIGH);
+    delay(500); 
+    digitalWrite(9, LOW);// wait for a second
   
     //Serial.println(cardidentifier);
     
@@ -96,6 +99,7 @@ void loop(void) {
     // Wait 1 second before continuing
     delay(2500);
     digitalWrite(12, LOW);
+    
   }
   else
   {
