@@ -1,0 +1,6 @@
+- Arduino Uno
+- Adafruit PN532 NFC/RFID Controller Shield for Arduino
+- 2x 220 Ohm Resistors
+- Mini trilmotor
+
+
